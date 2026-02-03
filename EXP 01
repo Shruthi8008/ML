@@ -1,0 +1,28 @@
+# FIND-S Algorithm Implementation
+
+# Training dataset: [Outlook, Temperature, Humidity, Wind, PlayTennis]
+data = [
+    ['Sunny', 'Warm', 'Normal', 'Strong', 'Yes'],
+    ['Sunny', 'Warm', 'High', 'Strong', 'Yes'],
+    ['Rainy', 'Cold', 'High', 'Strong', 'No'],
+    ['Sunny', 'Warm', 'High', 'Strong', 'Yes']
+]
+
+# Number of attributes (excluding target)
+num_attributes = len(data[0]) - 1
+
+# Initialize hypothesis with most specific values
+hypothesis = ['0'] * num_attributes
+
+print("Initial Hypothesis:", hypothesis)
+
+# FIND-S Algorithm
+for sample in data:
+    if sample[-1] == 'Yes':  # Consider only positive examples
+        for i in range(num_attributes):
+            if hypothesis[i] == '0':
+                hypothesis[i] = sample[i]
+            elif hypothesis[i] != sample[i]:
+                hypothesis[i] = '?'
+
+print("Final Hypothesis:", hypothesis)
